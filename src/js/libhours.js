@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 			} else {
 				if (libname in libData) {
 					var library = libData[libname];
-					text = '<a href="'+ library.calURL +'">Hours</a>, ' + date + library.jsonData.hours;
+					text = 'Today's Hours:, ' + library.jsonData.hours;
 				} else {
 					text = "ERROR: Unknown library name '"+libname+"'.";
 					if (typeof console != "undefined") {
