@@ -26,46 +26,23 @@ jQuery(document).ready(function($){
 	/************ CONFIGURATION ************/
 
 	/** Put your iid (Institution ID) here. **/
-	var iid = 335; //Penn Libraries
+	var iid = 1647; //GVSU Libraries
 	
 	/** This object contains all possible class name endings, and corresponding library information: libIDs, calendar URLs, and (optional) alternate names for hours chart.
 		Each library also has a "jsonData" property added to it when we retrieve the data from LibCal.
 		Biddle Law has a non-numeric libID because it is not in LibCal at all; we are adding it in manually. You can see we insert its "jsonData" property by hand.
 		NOTE: The order of this list determines the order of the libraries in the hours chart! Reorder at your stylistic discretion. **/
 	var libData = {
-		"annenberg" : {"libID": 306, "calURL": "http://www.library.upenn.edu/hours/annenberg.html"},
-		"bll" : {"libID": "BLL", "calURL": "https://www.law.upenn.edu/library/", "jsonData": {name:"Biddle Law Library", hours:"", url:"http://www.law.upenn.edu/bll/"}},
-		"biomed" : {"libID": 305, "calURL": "http://www.library.upenn.edu/hours/biomed.html"},
-		"chemistry" : {"libID": 412, "calURL": "http://www.library.upenn.edu/hours/chemistry.html"},
-		"dental" : {"libID": 425, "calURL": "http://www.library.upenn.edu/hours/dental.html", "altName": "Dental Library"},
-		"edcom" : {"libID": 168, "calURL": "http://www.library.upenn.edu/hours/edcom.html"},
-		"finearts" : {"libID": 427, "calURL": "http://www.library.upenn.edu/hours/finearts.html", "altName": "Fine Arts Library"},
-		"imgcoll" : {"libID": 643, "calURL": "http://www.library.upenn.edu/hours/fineartsimage.html"},
-		"kislak" : {"libID": 429, "calURL": "http://www.library.upenn.edu/hours/kislak.html"},
-		"rbm" : {"libID": 455, "calURL": "http://www.library.upenn.edu/hours/reading.html", "altName": "Kislak Center Reading Room"},
-		"goldstein": {"libID": 683, "calURL": "http://www.library.upenn.edu/hours/gallery.html"},
-		"furness": {"libID": 684, "calURL": "http://www.library.upenn.edu/hours/furness.html"},
-		"lcajs" : {"libID": 431, "calURL": "http://www.library.upenn.edu/hours/lcajs.html"},
-		"libra" : {"libID": 430, "calURL": "http://www.library.upenn.edu/hours/libra.html"},
-		"lippincott" : {"libID": 433, "calURL": "http://www.library.upenn.edu/hours/lippincott.html"},
-		"mpa" : {"libID": 434, "calURL": "http://www.library.upenn.edu/hours/mpa.html"},
-		"museum" : {"libID": 435, "calURL": "http://www.library.upenn.edu/hours/museum.html"},
-		"music" : {"libID" : 436, "calURL": "http://www.library.upenn.edu/hours/music.html"},
-		"ormandy" : {"libID": 453, "calURL": "http://www.library.upenn.edu/hours/ormandy.html"},
-		"pennhosp" : {"libID": 410, "calURL": "http://www.library.upenn.edu/hours/pennhosp.html"},
-		"vp" : {"libID": 437, "calURL": "http://www.library.upenn.edu/hours/vp.html"},
-		"vpusc" : {"libID": 457, "calURL": "http://www.library.upenn.edu/hours/vpusc.html", "altName": "Van Pelt Undergrad. Study Center"},
-		"vpcafe" : {"libID": 685, "calURL": "http://www.library.upenn.edu/hours/cafe.html"},
-		"vpill" : {"libID": 650, "calURL": "http://www.library.upenn.edu/hours/vpill.html"},
-		"vpref" : {"libID": 686, "calURL": "http://www.library.upenn.edu/hours/vpref.html"},
-		"vetc" : {"libID": 438, "calURL": "http://www.library.upenn.edu/hours/vetc.html", "altName": "Veterinary Library - Campus"},
-		"vetnbc" : {"libID": 456, "calURL": "http://www.library.upenn.edu/hours/vetnbc.html", "altName": "Veterinary Library - NBC"},
-		"wic" : {"libID": 166, "calURL": "http://www.library.upenn.edu/hours/wic.html"},
-		"vitale" : {"libID": 167, "calURL": "http://www.library.upenn.edu/hours/medialab.html"}
+		"maryi" : {"libID": 8552, "calURL": "https://www.gvsu.edu/library/maryi"},
+		"steelcase" : {"libID": 8738, "calURL": "https://www.gvsu.edu/library/steelcase"},
+		"frey" : {"libID": 8907, "calURL": "https://www.gvsu.edu/library/freydcih"},
+		"virtual" : {"libID": 19433, "calURL": "https://help.library.gvsu.edu"},
+		"seidman" : {"libID": 8908, "calURL": "https://www.gvsu.edu/library/seidmanhouse"},
+		"cml" : {"libID": 19434, "calURL": "https://www.gvsu.edu/library/cml"}
 	};
 	
 	/** These are the libIDs of all libraries to be shown in the hours chart; feel free to add and remove libraries as needed. **/
-	var chartLibraries = [306, "BLL", 305, 412, 425, 168, 427, 429, 431, 430, 433, 434, 435, 453, 455, 437, 457, 438, 456, 166];
+	var chartLibraries = [8552, 8738, 8907, 19433, 8908, 19434];
 
 	/***************************************/
 
