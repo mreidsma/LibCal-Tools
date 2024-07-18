@@ -47,14 +47,14 @@ jQuery(document).ready(function($){
 	/***************************************/
 
 	/** Retrieve & store the library information from LibCal, then begin inserting data into the page. **/
-	$.ajax({
+	jQuery.ajax({
 		url: "https://api3.libcal.com/api_hours_today.php?iid="+iid+"&lid=0&format=json",
 		type: 'GET',
 		cache: false,
 		dataType: 'jsonp'
 	})
 		.done( function (data) {
-			$.each(data.locations, function(i, location) {
+			jQuery.each(data.locations, function(i, location) {
 				var hours = ": " + location.rendered;
 				var data = {name:location.name, hours:hours, url:location.url};
 				try {
@@ -77,19 +77,19 @@ jQuery(document).ready(function($){
 	/** This function finds all HTML elements with libhours-* classes, and inserts the proper hours/HTML. **/
 	function insertHours() {
 		var date = todaysDate();
-		$("[class^='libhours-']").each(function(i, item) {
-			var libname = $(this).attr("class").split("-")[1];
+		jQuery("[class^='libhours-']").each(function(i, item) {
+			var libname = jQuery(this).attr("class").split("-")[1];
 			var text;
 			if (libname == "chart") {
 				// Display a temporary "loading" indicator while the chart gets built.
-				$('<div class="libhours-loading">Hours table loading; please wait...</div>').insertBefore($(this));
+				jQuery('<div class="libhours-loading">Hours table loading; please wait...</div>').insertBefore(jQuery(this));
 				// Insert the initial HTML to be filled in with the full hours chart.
 				text = '<div id="homepagehours"><ul class="homeul left"></ul></div>';
-				$(this).replaceWith(text);
+				jQuery(this).replaceWith(text);
 				insertChart();
 				// Remove "loading" indicator now that the chart has been inserted.
-				$(".libhours-loading").remove();
-			} else if ($(this).attr("class").split("-")[2]) {
+				jQuery(".libhours-loading").remove();
+			} else if (jQuery(this).attr("class").split("-")[2]) {
 				// This div has already been filled, so skip over it.
 				return;
 			} else {
@@ -102,9 +102,9 @@ jQuery(document).ready(function($){
 						console.error(text);
 					}
 				}
-				$(this).append(text);
+				jQuery(this).append(text);
 				// Change the class to mark that this div has been filled.
-				$(this).removeClass("libhours-"+libname).addClass("libhours-"+libname+"-filled");
+				jQuery(this).removeClass("libhours-"+libname).addClass("libhours-"+libname+"-filled");
 			}
 		});
 	}
@@ -112,7 +112,7 @@ jQuery(document).ready(function($){
 	/** This function builds, inserts, and styles the hours chart (for the main homepage and any other pages that need it). **/
 	function insertChart() {
 		//Hide the div containing this section until we are finished populating it, so people don't see a weird, half-loaded list.
-		$("#homepagehours").hide();
+		jQuery("#homepagehours").hide();
 	
 		// Dynamically build the <ul> of library information, and add into the page.
 		for (var key in libData) {
@@ -127,26 +127,26 @@ jQuery(document).ready(function($){
 				displayName = library.altName;
 			}
 			
-			var li = $('<li></li>');
-			var libName = $('<a></a>')
+			var li = jQuery('<li></li>');
+			var libName = jQuery('<a></a>')
 				.text(displayName)
 				.attr('href', library.jsonData.url)
 				.appendTo(li);
 			li.append('<span class="libhours-vertical-bar">&#160;|&#160;</span>');
-			var libHours = $('<a></a>')
+			var libHours = jQuery('<a></a>')
 				.text("hours")
 				.addClass("hours")
 				.attr('href', library.calURL)
 				.appendTo(li);
 			li.append(library.jsonData.hours);
-			$('ul.left').append(li);
+			jQuery('ul.left').append(li);
 		}
 
 		// Run the function that makes columns and styles <ul>s and <li>s.
 		formatChart();
 
 		// When everything is finished, unhide the container div.
-		$("#homepagehours").show();
+		jQuery("#homepagehours").show();
 	}
 	
 	/** This function gets a library from the libData list, given its libID. **/
@@ -169,27 +169,27 @@ jQuery(document).ready(function($){
 
 	/** This function splits the hours chart into 2 columns (left and right). **/
 	function formatChart() {
-		var itemNum = $('#homepagehours ul.homeul.left li').length;
+		var itemNum = jQuery('#homepagehours ul.homeul.left li').length;
 		var parity = itemNum % 2;
 		var firstHalfSize = Math.floor(itemNum/2) + parity;
 
 		if (firstHalfSize > 0) {
 			var firstHalf = '';
-			$('#homepagehours ul.homeul.left li').slice(0, firstHalfSize).each(function() {
-				firstHalf = firstHalf + $(this)[0].outerHTML;
+			jQuery('#homepagehours ul.homeul.left li').slice(0, firstHalfSize).each(function() {
+				firstHalf = firstHalf + jQuery(this)[0].outerHTML;
 			});
 			
 			var secondHalf = '';
 
-			$('#homepagehours ul.homeul.left li').slice(firstHalfSize).each(function() {
-				secondHalf = secondHalf + $(this)[0].outerHTML;
+			jQuery('#homepagehours ul.homeul.left li').slice(firstHalfSize).each(function() {
+				secondHalf = secondHalf + jQuery(this)[0].outerHTML;
 			});
 			
 			var finalHtml = '<ul class="homeul left">' + firstHalf + '</ul><ul class="homeul right">' + secondHalf + '<li class="morehoursinfo"><a href="http://www.library.upenn.edu/locations/">more info...</a></li></ul>';
-			$('#homepagehours ul.homeul.left').replaceWith(finalHtml);
+			jQuery('#homepagehours ul.homeul.left').replaceWith(finalHtml);
 
-			$('#homepagehours ul.homeul.left li:nth-child(odd), #homepagehours ul.homeul.right li:nth-child(odd)').addClass('even'); // :odd uses zero-indexing
-			$('#homepagehours ul.homeul.left li:nth-child(even), #homepagehours ul.homeul.right li:nth-child(even)').addClass('odd');
+			jQuery('#homepagehours ul.homeul.left li:nth-child(odd), #homepagehours ul.homeul.right li:nth-child(odd)').addClass('even'); // :odd uses zero-indexing
+			jQuery('#homepagehours ul.homeul.left li:nth-child(even), #homepagehours ul.homeul.right li:nth-child(even)').addClass('odd');
 		}
 	}
 }); //end jQuery
