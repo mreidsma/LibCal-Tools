@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 			} else {
 				if (libname in libData) {
 					var library = libData[libname];
-					text = 'Today: ' + library.jsonData.hours;
+					text = 'Today ' + library.jsonData.hours;
 				} else {
 					text = "ERROR: Unknown library name '"+libname+"'.";
 					if (typeof console != "undefined") {
