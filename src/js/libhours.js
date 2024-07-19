@@ -48,7 +48,7 @@ jQuery(document).ready(function($){
 
 	/** Retrieve & store the library information from LibCal, then begin inserting data into the page. **/
 	jQuery.ajax({
-		url: "https://api3.libcal.com/api_hours_today.php?iid="+iid+"&lid=0&format=json",
+		url: "https://api3.libcal.com/api_hours_today.php?iid="+iid+"&lid=0&format=json&systemTime=1",
 		type: 'GET',
 		cache: false,
 		dataType: 'jsonp'
